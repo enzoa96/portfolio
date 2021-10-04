@@ -1,5 +1,7 @@
 import React from "react";
-import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
+import { CgScreen } from "react-icons/cg";
+import { IoFolderSharp } from "react-icons/io5";
+import { BsFillTrashFill } from "react-icons/bs";
 
 var today = new Date();
 var date =
@@ -10,18 +12,42 @@ var dateTime = date + " " + time;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="bg-black">
+    <div className="h-screen">
+      <div
+        style={{
+          minHeight: "100vh",
+          backgroundImage:
+            "url('https://www.xtrafondos.com/wallpapers/ubuntu-linux-minimalism-3445.jpg')",
+        }}
+      >
+        <header className="bg-black">
           <h1 className="text-white text-center">{dateTime}</h1>
-          <div>
-            <img
-              src="https://www.xtrafondos.com/wallpapers/ubuntu-linux-minimalism-3445.jpg"
-              height={190}
-            />
-          </div>
-        </div>
-      </header>
+        </header>
+        <main className="flex flex-col text-white text-6xl p-8 gap-16">
+          <button
+            onDoubleClick={() => {
+              console.log(alert("mi pc"));
+            }}
+          >
+            <CgScreen></CgScreen>
+          </button>
+          <button
+            onDoubleClick={() => {
+              console.log(alert("mis archivos"));
+            }}
+          >
+            <IoFolderSharp></IoFolderSharp>
+          </button>
+
+          <button
+            onDoubleClick={() => {
+              console.log(alert("papelera"));
+            }}
+          >
+            <BsFillTrashFill></BsFillTrashFill>
+          </button>
+        </main>
+      </div>
     </div>
   );
 }
