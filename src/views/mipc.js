@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function mipc() {
-  <h1>hola mundo</h1>;
+  return <h1>hola mipc</h1>;
 }

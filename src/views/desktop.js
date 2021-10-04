@@ -12,10 +12,11 @@ var dateTime = date + " " + time;
 
 function App() {
   return (
-    <div className="h-screen">
+    <div className="h-screen w-screen">
       <div
         style={{
-          minHeight: "100vh",
+          minHeight: "100%",
+
           backgroundImage:
             "url('https://www.xtrafondos.com/wallpapers/ubuntu-linux-minimalism-3445.jpg')",
         }}
