@@ -26,14 +26,14 @@ function App() {
         <main className="flex flex-col text-white text-6xl p-8 gap-16">
           <button
             onDoubleClick={() => {
-              console.log(alert("mi pc"));
+              alert("mi pc");
             }}
           >
             <CgScreen></CgScreen>
           </button>
           <button
             onDoubleClick={() => {
-              console.log(alert("mis archivos"));
+              alert("mis archivos");
             }}
           >
             <IoFolderSharp></IoFolderSharp>
@@ -41,7 +41,7 @@ function App() {
 
           <button
             onDoubleClick={() => {
-              console.log(alert("papelera"));
+              alert("papelera");
             }}
           >
             <BsFillTrashFill></BsFillTrashFill>
