@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { CgScreen } from "react-icons/cg";
 import { IoFolderSharp } from "react-icons/io5";
 import { BsFillTrashFill } from "react-icons/bs";
+import MiPc from "./views/mipc";
+import Archivos from "./views/archivos";
+import Papelera from "./views/papelera";
 
 var today = new Date();
 var date =
@@ -11,6 +14,13 @@ var time =
 var dateTime = date + " " + time;
 
 function App() {
+  const [view, setView] = useState("");
+
+  const handleViewChange = (e) => {
+    const name = e.target.getAttribute("name");
+    setView(name);
+  };
+
   return (
     <div className="h-screen w-screen">
       <div
@@ -25,28 +35,21 @@ function App() {
           <h1 className="text-white text-center">{dateTime}</h1>
         </header>
         <main className="flex flex-col text-white text-6xl p-8 gap-16">
-          <button
-            onDoubleClick={() => {
-              alert("mi pc");
-            }}
-          >
+          <button className="w-24" name="mipc" onDoubleClick={handleViewChange}>
             <CgScreen></CgScreen>
           </button>
-          <button
-            onDoubleClick={() => {
-              alert("mis archivos");
-            }}
-          >
+          <button name="archivos" onDoubleClick={handleViewChange}>
             <IoFolderSharp></IoFolderSharp>
           </button>
-
-          <button
-            onDoubleClick={() => {
-              alert("papelera");
-            }}
-          >
+          <button name="papelera" onDoubleClick={handleViewChange}>
             <BsFillTrashFill></BsFillTrashFill>
           </button>
+
+          {view === "archivos" && <Archivos />}
+
+          {view === "mipc" && <MiPc />}
+
+          {view === "papelera" && <Papelera />}
         </main>
       </div>
     </div>
