@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CgScreen } from "react-icons/cg";
 import { IoFolderSharp } from "react-icons/io5";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -6,19 +6,33 @@ import MiPc from "./views/mipc";
 import Archivos from "./views/archivos";
 import Papelera from "./views/papelera";
 
-var today = new Date();
-var date =
-  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-var time =
-  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date + " " + time;
-
 function App() {
   const [view, setView] = useState("");
+  const [time, setTime] = useState("");
 
+  React.useEffect(() => {
+    const tInterval = setInterval(() => {
+      var today = new Date();
+      var date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      var time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      setTime(date + " " + time);
+    }, 1000);
+
+    return () => clearInterval(tInterval);
+  }, []);
   const handleViewChange = (e) => {
     const name = e.target.getAttribute("name");
     setView(name);
+  };
+
+  const handleClose = () => {
+    setView("");
   };
 
   return (
@@ -32,24 +46,32 @@ function App() {
         }}
       >
         <header className="bg-black">
-          <h1 className="text-white text-center">{dateTime}</h1>
+          <h1 className="text-white text-center">{time}</h1>
         </header>
-        <main className="flex flex-col text-white text-6xl p-8 gap-16">
-          <button className="w-24" name="mipc" onDoubleClick={handleViewChange}>
-            <CgScreen></CgScreen>
-          </button>
-          <button name="archivos" onDoubleClick={handleViewChange}>
-            <IoFolderSharp></IoFolderSharp>
-          </button>
-          <button name="papelera" onDoubleClick={handleViewChange}>
-            <BsFillTrashFill></BsFillTrashFill>
-          </button>
+        <main className="flex flex-col text-white p-8 gap-16">
+          <CgScreen
+            className="cursor-pointer text-6xl "
+            name="mipc"
+            onClick={handleViewChange}
+          />
 
-          {view === "archivos" && <Archivos />}
+          <IoFolderSharp
+            className="cursor-pointer text-6xl"
+            name="archivos"
+            onClick={handleViewChange}
+          />
 
-          {view === "mipc" && <MiPc />}
+          <BsFillTrashFill
+            className="cursor-pointer text-6xl"
+            name="papelera"
+            onClick={handleViewChange}
+          />
 
-          {view === "papelera" && <Papelera />}
+          {view === "archivos" && <Archivos onClose={handleClose} />}
+
+          {view === "mipc" && <MiPc onClose={handleClose} />}
+
+          {view === "papelera" && <Papelera onClose={handleClose} />}
         </main>
       </div>
     </div>
